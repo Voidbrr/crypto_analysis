@@ -1,13 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 import { Ticker, TechnicalData, AnalysisResponse } from '../types';
 
-
-
-// This tells the app to look for the secret during the build process
-const API_KEY = import.meta.env.API_KEY;
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
-
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const analyzeTechnicalData = async (
   ticker: string,
@@ -73,7 +67,18 @@ export const analyzeTechnicalData = async (
     *Final bias and invalidation levels.*
 
     ### Social Media Summary
-    *A concise, engaging paragraph (max 280 chars) summarizing the 2H setup for X/Twitter. Focus on the actionable trigger. No hashtags except $${ticker}.*
+    *STRICTLY follow this format for the social post:*
+    
+    #${ticker} LTF plan
+    
+    $${ticker} is [Current critical context, e.g. "at another critical turning point"].
+    
+    Can it [Bullish Scenario, e.g. "hold the 94K level and give another leg higher"]?
+    Or will it [Bearish Scenario, e.g. "break down and fall back into the range"]?
+    
+    ⚠️ Hoping for [Specific Target/Action], but prepared for [Invalidation/Risk].
+    
+    *Tone: Ambiguous, questioning, "little hint, little confusion", concise.*
   `;
 
   try {
