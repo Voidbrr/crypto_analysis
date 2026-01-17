@@ -1,7 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { Ticker, TechnicalData, AnalysisResponse } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+
+
+// This tells the app to look for the secret during the build process
+const API_KEY = import.meta.env.API_KEY;
+
+const ai = new GoogleGenAI({ apiKey: API_KEY });
+
 
 export const analyzeTechnicalData = async (
   ticker: string,
