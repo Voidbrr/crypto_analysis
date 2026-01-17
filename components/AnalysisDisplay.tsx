@@ -97,13 +97,24 @@ const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({ response, ticker }) =
               AI Technical Analysis
             </h2>
             
-            {confidenceScore > 0 && (
-                <div className={`flex items-center gap-3 px-4 py-1.5 rounded-full border ${getScoreColor(confidenceScore)}`}>
-                    <Activity className="w-4 h-4" />
-                    <span className="font-bold">Conviction: {confidenceScore}/10</span>
-                    {convictionReason && <span className="hidden sm:inline text-xs opacity-80">| {convictionReason}</span>}
-                </div>
-            )}
+            <div className="flex items-center gap-4">
+                {confidenceScore > 0 && (
+                    <div className={`flex items-center gap-3 px-4 py-1.5 rounded-full border ${getScoreColor(confidenceScore)}`}>
+                        <Activity className="w-4 h-4" />
+                        <span className="font-bold">{confidenceScore}/10</span>
+                        {convictionReason && <span className="hidden sm:inline text-xs opacity-80 border-l border-current pl-2 ml-1">{convictionReason}</span>}
+                    </div>
+                )}
+                
+                <button
+                    onClick={handleEmailReport}
+                    className="flex items-center gap-2 px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-lg text-xs font-bold transition-all border border-gray-700"
+                    title="Send Full Report via Email"
+                >
+                    <Mail className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Email Report</span>
+                </button>
+            </div>
           </div>
           
           {/* Main Markdown Content with Custom Table Styling */}
@@ -162,7 +173,7 @@ const AnalysisDisplay: React.FC<AnalysisDisplayProps> = ({ response, ticker }) =
                     </button>
                 </div>
             </div>
-            <div className="bg-black/40 rounded-lg p-4 font-mono text-sm text-gray-300 border border-gray-800/50">
+            <div className="bg-black/40 rounded-lg p-4 font-mono text-sm text-gray-300 border border-gray-800/50 whitespace-pre-line">
                 {socialSummary}
             </div>
         </div>
